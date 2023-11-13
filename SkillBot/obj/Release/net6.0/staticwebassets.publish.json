@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "j9MSA7mv8jclKY/nVlAZS24RPDibutNYZksmH/J4ANo=",
+  "Source": "Microsoft.BotBuilderSamples.SkillBot",
+  "BasePath": "_content/Microsoft.BotBuilderSamples.SkillBot",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Microsoft.BotBuilderSamples.SkillBot\\wwwroot",
+      "Source": "Microsoft.BotBuilderSamples.SkillBot",
+      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\",
+      "BasePath": "_content/Microsoft.BotBuilderSamples.SkillBot",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\default.htm",
+      "SourceId": "Microsoft.BotBuilderSamples.SkillBot",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\",
+      "BasePath": "_content/Microsoft.BotBuilderSamples.SkillBot",
+      "RelativePath": "default.htm",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\default.htm"
+    },
+    {
+      "Identity": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\manifest\\ssoskillbot-manifest-1.0.json",
+      "SourceId": "Microsoft.BotBuilderSamples.SkillBot",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\",
+      "BasePath": "_content/Microsoft.BotBuilderSamples.SkillBot",
+      "RelativePath": "manifest/ssoskillbot-manifest-1.0.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\manifest\\ssoskillbot-manifest-1.0.json"
+    }
+  ]
+}

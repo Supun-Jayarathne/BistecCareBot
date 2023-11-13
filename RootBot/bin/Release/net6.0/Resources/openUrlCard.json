@@ -1,0 +1,29 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This card's action will open a URL"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "login Bistec Care",
+      "url": "[loginUrl]"
+    }
+    //,
+    //{
+    //  "type": "Action.OpenUrl",
+    //  "title": "Google",
+    //  "url": "[baseurl]?url=https://www.google.com"
+    //},
+    //{
+    //  "type": "Action.OpenUrl",
+    //  "title": "Amazon",
+    //  "url": "[baseurl]?url=https://www.amazon.com"
+    //}
+  ]
+}

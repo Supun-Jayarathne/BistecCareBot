@@ -1,0 +1,422 @@
+[
+  {
+    "text": "Book a flight from New York to Los Angeles on June 10th",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 17,
+        "length": 8
+      },
+      {
+        "category": "toCity",
+        "offset": 28,
+        "length": 11
+      },
+      {
+        "category": "flightDate",
+        "offset": 42,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "I want to book a flight from Chicago to Miami for July 20th",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 8
+      },
+      {
+        "category": "toCity",
+        "offset": 41,
+        "length": 5
+      },
+      {
+        "category": "flightDate",
+        "offset": 48,
+        "length": 9
+      }
+    ]
+  },
+  {
+    "text": "Book me a flight from San Francisco to Las Vegas on August 5th",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 13
+      },
+      {
+        "category": "toCity",
+        "offset": 46,
+        "length": 9
+      },
+      {
+        "category": "flightDate",
+        "offset": 50,
+        "length": 11
+      }
+    ]
+  },
+  {
+    "text": "I'd like to book a flight from Boston to Chicago on September 15th",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 6
+      },
+      {
+        "category": "toCity",
+        "offset": 41,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 53,
+        "length": 13
+      }
+    ]
+  },
+  {
+    "text": "Book a flight from Los Angeles to New York for July 30th",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 17,
+        "length": 11
+      },
+      {
+        "category": "toCity",
+        "offset": 31,
+        "length": 8
+      },
+      {
+        "category": "flightDate",
+        "offset": 46,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "Can you help me book a flight from Seattle to Denver on June 5th?",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 31,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 41,
+        "length": 6
+      },
+      {
+        "category": "flightDate",
+        "offset": 56,
+        "length": 9
+      }
+    ]
+  },
+  {
+    "text": "Book a flight from Miami to Orlando on August 18th, please.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 17,
+        "length": 5
+      },
+      {
+        "category": "toCity",
+        "offset": 28,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 43,
+        "length": 11
+      }
+    ]
+  },
+  {
+    "text": "I'm looking to book a flight from Las Vegas to San Francisco on July 25th.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 10
+      },
+      {
+        "category": "toCity",
+        "offset": 45,
+        "length": 13
+      },
+      {
+        "category": "flightDate",
+        "offset": 60,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "Book me a flight from Denver to Chicago for September 10th, please.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 42,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 34,
+        "length": 23
+      }
+    ]
+  },
+  {
+    "text": "Please help me book a flight from Orlando to Miami on August 8th.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 31,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 43,
+        "length": 5
+      },
+      {
+        "category": "flightDate",
+        "offset": 48,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "I'd like to book a flight from Houston to Atlanta on October 20th.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 42,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 45,
+        "length": 12
+      }
+    ]
+  },
+  {
+    "text": "Book a flight from San Diego to Seattle for July 15th, please.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 17,
+        "length": 9
+      },
+      {
+        "category": "toCity",
+        "offset": 31,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 46,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "Can you assist me in booking a flight from Chicago to Los Angeles on June 30th?",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 32,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 44,
+        "length": 11
+      },
+      {
+        "category": "flightDate",
+        "offset": 59,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "I want to book a flight from Atlanta to Houston on September 5th, please help.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 42,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 57,
+        "length": 11
+      }
+    ]
+  },
+  {
+    "text": "Book me a flight from Phoenix to Denver for August 25th, please.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 42,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 47,
+        "length": 10
+      }
+    ]
+  },
+  {
+    "text": "Please assist me in booking a flight from Boston to New York on July 1st.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 32,
+        "length": 6
+      },
+      {
+        "category": "toCity",
+        "offset": 44,
+        "length": 8
+      },
+      {
+        "category": "flightDate",
+        "offset": 59,
+        "length": 8
+      }
+    ]
+  },
+  {
+    "text": "I'd like to book a flight from Dallas to Miami on October 10th, please help.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 6
+      },
+      {
+        "category": "toCity",
+        "offset": 42,
+        "length": 5
+      },
+      {
+        "category": "flightDate",
+        "offset": 57,
+        "length": 12
+      }
+    ]
+  },
+  {
+    "text": "Can you help me book a flight from Philadelphia to Washington, D.C. on September 15th?",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 31,
+        "length": 13
+      },
+      {
+        "category": "toCity",
+        "offset": 50,
+        "length": 13
+      },
+      {
+        "category": "flightDate",
+        "offset": 65,
+        "length": 12
+      }
+    ]
+  },
+  {
+    "text": "I want to book a flight from San Jose to Oakland on July 3rd, please.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 8
+      },
+      {
+        "category": "toCity",
+        "offset": 43,
+        "length": 7
+      },
+      {
+        "category": "flightDate",
+        "offset": 58,
+        "length": 7
+      }
+    ]
+  },
+  {
+    "text": "Book a flight from Houston to Dallas for August 12th, please assist me.",
+    "intent": "BookFlight",
+    "entities": [
+      {
+        "category": "fromCity",
+        "offset": 30,
+        "length": 7
+      },
+      {
+        "category": "toCity",
+        "offset": 42,
+        "length": 6
+      },
+      {
+        "category": "flightDate",
+        "offset": 57,
+        "length": 11
+      }
+    ]
+  }
+]
