@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "ke0EskwgVWRJPtPxfr5w3plrN52WAq42hy+o9n4k148=",
+  "Source": "Microsoft.BotBuilderSamples.RootBot",
+  "BasePath": "_content/Microsoft.BotBuilderSamples.RootBot",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Microsoft.BotBuilderSamples.RootBot\\wwwroot",
+      "Source": "Microsoft.BotBuilderSamples.RootBot",
+      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\RootBot\\wwwroot\\",
+      "BasePath": "_content/Microsoft.BotBuilderSamples.RootBot",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\RootBot\\wwwroot\\default.htm",
+      "SourceId": "Microsoft.BotBuilderSamples.RootBot",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\RootBot\\wwwroot\\",
+      "BasePath": "_content/Microsoft.BotBuilderSamples.RootBot",
+      "RelativePath": "default.htm",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\default.htm"
+    }
+  ]
+}
