@@ -57,3 +57,8 @@ C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\Microsoft.BotBuilderSamples.RootBot.pdb
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\RootBot.genruntimeconfig.cache
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\ref\Microsoft.BotBuilderSamples.RootBot.dll
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\staticwebassets\msbuild.Microsoft.BotBuilderSamples.RootBot.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\staticwebassets\msbuild.build.Microsoft.BotBuilderSamples.RootBot.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\staticwebassets\msbuild.buildMultiTargeting.Microsoft.BotBuilderSamples.RootBot.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\staticwebassets\msbuild.buildTransitive.Microsoft.BotBuilderSamples.RootBot.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Release\net6.0\staticwebassets.pack.json

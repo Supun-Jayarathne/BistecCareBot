@@ -69,6 +69,7 @@ C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\D
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\DeploymentTemplates\DeployWithNewResourceGroup\parameters-for-template-BotApp-new-rg.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\DeploymentTemplates\DeployWithNewResourceGroup\template-AzureBot-new-rg.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\DeploymentTemplates\DeployWithNewResourceGroup\template-BotApp-new-rg.json
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\Resources\openUrlCard.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\Microsoft.BotBuilderSamples.RootBot.staticwebassets.runtime.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\Microsoft.BotBuilderSamples.RootBot.exe
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\appsettings.json
@@ -110,6 +111,11 @@ C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\R
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\RootBot.csproj.CoreCompileInputs.cache
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\Microsoft.BotBuilderSamples.RootBot.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\Microsoft.BotBuilderSamples.RootBot.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets\msbuild.Microsoft.BotBuilderSamples.RootBot.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets\msbuild.build.Microsoft.BotBuilderSamples.RootBot.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Microsoft.BotBuilderSamples.RootBot.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Microsoft.BotBuilderSamples.RootBot.props
+C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\scopedcss\bundle\Microsoft.BotBuilderSamples.RootBot.styles.css
@@ -119,4 +125,3 @@ C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\r
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\Microsoft.BotBuilderSamples.RootBot.pdb
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\RootBot.genruntimeconfig.cache
 C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\obj\Debug\net6.0\ref\Microsoft.BotBuilderSamples.RootBot.dll
-C:\Users\SupunJayarathneBISTE\Downloads\BistecCareBot\RootBot\bin\Debug\net6.0\Resources\openUrlCard.json

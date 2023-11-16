@@ -6,7 +6,7 @@ using System;
 
 namespace OpenUrlRedirectBot.Controllers
 {
-    [Route("redirect")]
+    [Route("Redirect")]
     [ApiController]
     public class RedirectController : ControllerBase
     {
@@ -18,28 +18,30 @@ namespace OpenUrlRedirectBot.Controllers
         }
 
 
-        [AllowAnonymous]
-        [DisableRequestSizeLimit]
-        [HttpGet("callback")]
-        public  IActionResult IamCallback()
-        {
-            //
-            // Read external identity from the temporary cookie
-            //
-            //var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //[AllowAnonymous]
+        //[DisableRequestSizeLimit]
+        //[HttpPost]
+        //[HttpGet]
+        ////[HttpGet("callback")]
+        //public  IActionResult IamCallback(string id_token)
+        //{
+        //    //
+        //    // Read external identity from the temporary cookie
+        //    //
+        //    //var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            //if (result?.Succeeded != true)
-            //{
-            //    throw new Exception("Nein");
-            //}
+        //    //if (result?.Succeeded != true)
+        //    //{
+        //    //    throw new Exception("Nein");
+        //    //}
 
-            //var oauthUser = result.Principal;
+        //    //var oauthUser = result.Principal;
 
-            var result = "Hit the end point";
+        //    var result = "Hit the end point"+ id_token;
 
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
     }
 
 }

@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\default.htm",
+      "PackagePath": "staticwebassets\\default.htm"
+    },
+    {
+      "Id": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\manifest\\ssoskillbot-manifest-1.0.json",
+      "PackagePath": "staticwebassets\\manifest\\ssoskillbot-manifest-1.0.json"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Microsoft.BotBuilderSamples.SkillBot.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.Microsoft.BotBuilderSamples.SkillBot.props",
+      "PackagePath": "build\\Microsoft.BotBuilderSamples.SkillBot.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.Microsoft.BotBuilderSamples.SkillBot.props",
+      "PackagePath": "buildMultiTargeting\\Microsoft.BotBuilderSamples.SkillBot.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.Microsoft.BotBuilderSamples.SkillBot.props",
+      "PackagePath": "buildTransitive\\Microsoft.BotBuilderSamples.SkillBot.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
