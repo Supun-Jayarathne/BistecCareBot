@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.Recognizers.Text.Config;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,10 +24,17 @@ namespace OpenUrlRedirectBot.Controllers
     [ApiController]
     public class CallBackController : ControllerBase
     {
+        private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
+        public CallBackController(Microsoft.Extensions.Configuration.IConfiguration iconfig)
+        {
+            configuration = iconfig;
+        }
+
         [AllowAnonymous]
         [DisableRequestSizeLimit]
         [HttpGet("callback")]
         public async Task<IActionResult> AuthCallback([FromQuery] string code)
+        
         {
             var client = new HttpClient();
             client.Timeout = TimeSpan.FromSeconds(300);
@@ -31,16 +42,17 @@ namespace OpenUrlRedirectBot.Controllers
 
             var request = new HttpRequestMessage();
             request.Method = HttpMethod.Post;
-            request.RequestUri = new Uri("https://bisteccareltddev.b2clogin.com/bisteccareltddev.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/token");
+            request.RequestUri = new Uri(configuration.GetSection("Authentication")["tokenUrl"]);
 
             using MultipartFormDataContent multipartContent = new();
             multipartContent.Add(new StringContent(code, Encoding.UTF8, MediaTypeNames.Text.Plain), "code");
-            multipartContent.Add(new StringContent("authorization_code", Encoding.UTF8, MediaTypeNames.Text.Plain), "grant_type");
-            multipartContent.Add(new StringContent("047aRKq64Yt8vGLqTWWuDSC5kSvXJGIr7zXpZgDSR10", Encoding.UTF8, MediaTypeNames.Text.Plain), "code_verifier");
-            multipartContent.Add(new StringContent("https://supunrootbotapp.azurewebsites.net/callback", Encoding.UTF8, MediaTypeNames.Text.Plain), "redirect_uri");
-            multipartContent.Add(new StringContent("4521dfe1-0635-4a44-bd4a-f4b42fca2067", Encoding.UTF8, MediaTypeNames.Text.Plain), "client_id");
-            multipartContent.Add(new StringContent("openid profile email offline_access https://bisteccareltddev.onmicrosoft.com/4521dfe1-0635-4a44-bd4a-f4b42fca2067/Calendar.Read", Encoding.UTF8, MediaTypeNames.Text.Plain), "scope");
-            using var response = await client.PostAsync("https://bisteccareltddev.b2clogin.com/bisteccareltddev.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/token", multipartContent);
+            multipartContent.Add(new StringContent(configuration.GetSection("Authentication")["grant_type"], Encoding.UTF8, MediaTypeNames.Text.Plain), "grant_type");
+            multipartContent.Add(new StringContent(configuration.GetSection("Authentication")["code_verifier"], Encoding.UTF8, MediaTypeNames.Text.Plain), "code_verifier");
+            multipartContent.Add(new StringContent(configuration.GetSection("Authentication")["redirect_uri"], Encoding.UTF8, MediaTypeNames.Text.Plain), "redirect_uri");
+            multipartContent.Add(new StringContent(configuration.GetSection("Authentication")["client_id"], Encoding.UTF8, MediaTypeNames.Text.Plain), "client_id");
+            multipartContent.Add(new StringContent(configuration.GetSection("Authentication")["scope"], Encoding.UTF8, MediaTypeNames.Text.Plain), "scope");
+
+            using var response = await client.PostAsync(configuration.GetSection("Authentication")["tokenUrl"], multipartContent);
 
             if (response.IsSuccessStatusCode)
             {
