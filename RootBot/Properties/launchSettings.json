@@ -4,7 +4,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:3978",
+      "applicationUrl": "http://localhost:4201",
       "sslPort": 0
     }
   },
@@ -20,7 +20,7 @@
     "RootBot": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:3978",
+      "applicationUrl": "http://localhost:4201",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

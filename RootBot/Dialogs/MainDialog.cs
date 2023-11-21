@@ -11,6 +11,7 @@ using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Builder.Skills;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
+using Microsoft.BotBuilderSamples.RootBot.Objects;
 using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
@@ -22,10 +23,11 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
         private readonly BotFrameworkAuthentication _auth;
         private readonly string _connectionName;
         private readonly BotFrameworkSkill _ssoSkill;
-
-        public MainDialog(BotFrameworkAuthentication auth, ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillsConfiguration skillsConfig, IConfiguration configuration)
+        private readonly ITokenService _tokenService;
+        public MainDialog(BotFrameworkAuthentication auth, ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillsConfiguration skillsConfig, IConfiguration configuration, ITokenService tokenService)
             : base(nameof(MainDialog))
         {
+            _tokenService = tokenService;
             _auth = auth ?? throw new ArgumentNullException(nameof(auth));
 
             var botId = configuration.GetSection(MicrosoftAppCredentials.MicrosoftAppIdKey)?.Value;
@@ -48,13 +50,13 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             }
 
             AddDialog(new ChoicePrompt("ActionStepPrompt"));
-            AddDialog(new SsoSignInDialog(_connectionName));
+            AddDialog(new SsoSignInDialog(_connectionName, _tokenService));
             AddDialog(new SkillDialog(CreateSkillDialogOptions(skillsConfig, botId, conversationIdFactory, conversationState), nameof(SkillDialog)));
 
             var waterfallSteps = new WaterfallStep[]
             {
-                CheckTokenAsync,
-                ContinueStepAsync
+              PromptActionStepAsync,
+              
             };
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), waterfallSteps));
 
@@ -79,69 +81,12 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             };
         }
 
-
-        // Check the token based on the current sign in status and skill redirection
-        private async Task<DialogTurnResult> CheckTokenAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> PromptActionStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            var userId = stepContext.Context.Activity?.From?.Id;
-            var userTokenClient = stepContext.Context.TurnState.Get<UserTokenClient>();
 
-            // Show different options if the user is signed in on the parent or not.
-            var token = await userTokenClient.GetUserTokenAsync(userId, _connectionName, stepContext.Context.Activity?.ChannelId, null, cancellationToken);
-            if (token == null)
-            {
-                var messageText = "First you need to login via bistec care system?";
-                await stepContext.Context.SendActivityAsync(messageText, cancellationToken: cancellationToken);
-                return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
-
-            }
-            //else
-            //{
-            //    var beginSkillActivity = new Activity
-            //    {
-            //        Type = ActivityTypes.Event,
-            //        Name = "CLU"
-            //    };
-
-            //    // Save active skill in state (this is use in case of errors in the AdapterWithErrorHandler).
-            //    await _activeSkillProperty.SetAsync(stepContext.Context, _ssoSkill, cancellationToken);
-
-            //    return await stepContext.BeginDialogAsync(nameof(SkillDialog), new BeginSkillDialogOptions { Activity = beginSkillActivity }, cancellationToken);
-            //}
-
-            return await stepContext.NextAsync(cancellationToken: cancellationToken); ;
+            return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
         }
 
-        private async Task<DialogTurnResult> ContinueStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        {
-            //var userId = stepContext.Context.Activity?.From?.Id;
-            //var userTokenClient = stepContext.Context.TurnState.Get<UserTokenClient>();
-
-            //// Show different options if the user is signed in on the parent or not.
-            //var token = await userTokenClient.GetUserTokenAsync(userId, _connectionName, stepContext.Context.Activity?.ChannelId, null, cancellationToken);
-            //if (token == null)
-            //{
-            //    var messageText = "First you need to login via bistec care system?";
-            //    await stepContext.Context.SendActivityAsync(messageText, cancellationToken: cancellationToken);
-            //    return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
-
-            //}
-            //else
-            //{
-                var beginSkillActivity = new Activity
-                {
-                    Type = ActivityTypes.Event,
-                    Name = "CLU"
-                };
-
-                // Save active skill in state (this is use in case of errors in the AdapterWithErrorHandler).
-                await _activeSkillProperty.SetAsync(stepContext.Context, _ssoSkill, cancellationToken);
-
-                return await stepContext.BeginDialogAsync(nameof(SkillDialog), new BeginSkillDialogOptions { Activity = beginSkillActivity }, cancellationToken);
-            //}
-
-            //return await stepContext.NextAsync(cancellationToken: cancellationToken); ;
-        }
 
         private async Task<DialogTurnResult> PromptFinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
