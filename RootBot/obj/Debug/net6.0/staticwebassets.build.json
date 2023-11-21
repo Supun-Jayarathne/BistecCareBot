@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ke0EskwgVWRJPtPxfr5w3plrN52WAq42hy+o9n4k148=",
+  "Hash": "xehhZQAK+2Mg/3Ohfyx4AS8iDEPRdBDQf9mMTDrYvbs=",
   "Source": "Microsoft.BotBuilderSamples.RootBot",
   "BasePath": "_content/Microsoft.BotBuilderSamples.RootBot",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Microsoft.BotBuilderSamples.RootBot\\wwwroot",
       "Source": "Microsoft.BotBuilderSamples.RootBot",
-      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\RootBot\\wwwroot\\",
+      "ContentRoot": "D:\\BNewBistecCareBot\\BistecCareBot\\RootBot\\wwwroot\\",
       "BasePath": "_content/Microsoft.BotBuilderSamples.RootBot",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\RootBot\\wwwroot\\default.htm",
+      "Identity": "D:\\BNewBistecCareBot\\BistecCareBot\\RootBot\\wwwroot\\default.htm",
       "SourceId": "Microsoft.BotBuilderSamples.RootBot",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\RootBot\\wwwroot\\",
+      "ContentRoot": "D:\\BNewBistecCareBot\\BistecCareBot\\RootBot\\wwwroot\\",
       "BasePath": "_content/Microsoft.BotBuilderSamples.RootBot",
       "RelativePath": "default.htm",
       "AssetKind": "All",

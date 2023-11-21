@@ -4,12 +4,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using BDO.Bot.BDOSkillBot.Objects;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Skills;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.BotBuilderSamples.RootBot.Objects;
 using Microsoft.BotBuilderSamples.SSORootBot.Bots;
 using Microsoft.BotBuilderSamples.SSORootBot.Dialogs;
 using Microsoft.Extensions.Configuration;
@@ -92,6 +94,9 @@ namespace Microsoft.BotBuilderSamples.SSORootBot
 
             // Register the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, RootBot<MainDialog>>();
+
+            services.AddSingleton<TokenStorage>();
+            services.AddSingleton<ITokenService, TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

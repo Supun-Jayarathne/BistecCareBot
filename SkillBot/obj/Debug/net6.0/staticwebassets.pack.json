@@ -1,11 +1,11 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\default.htm",
+      "Id": "D:\\BNewBistecCareBot\\BistecCareBot\\SkillBot\\wwwroot\\default.htm",
       "PackagePath": "staticwebassets\\default.htm"
     },
     {
-      "Id": "C:\\Users\\SupunJayarathneBISTE\\Downloads\\BistecCareBot\\SkillBot\\wwwroot\\manifest\\ssoskillbot-manifest-1.0.json",
+      "Id": "D:\\BNewBistecCareBot\\BistecCareBot\\SkillBot\\wwwroot\\manifest\\ssoskillbot-manifest-1.0.json",
       "PackagePath": "staticwebassets\\manifest\\ssoskillbot-manifest-1.0.json"
     },
     {
