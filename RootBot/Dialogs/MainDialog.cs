@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using BDO.Bot.BDOSkillBot.Objects;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
@@ -24,10 +26,12 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
         private readonly string _connectionName;
         private readonly BotFrameworkSkill _ssoSkill;
         private readonly ITokenService _tokenService;
-        public MainDialog(BotFrameworkAuthentication auth, ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillsConfiguration skillsConfig, IConfiguration configuration, ITokenService tokenService)
+        private readonly UserState _userState;
+        public MainDialog(BotFrameworkAuthentication auth, ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillsConfiguration skillsConfig, IConfiguration configuration, ITokenService tokenService, UserState userState)
             : base(nameof(MainDialog))
         {
             _tokenService = tokenService;
+            _userState= userState;
             _auth = auth ?? throw new ArgumentNullException(nameof(auth));
 
             var botId = configuration.GetSection(MicrosoftAppCredentials.MicrosoftAppIdKey)?.Value;
@@ -50,13 +54,14 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             }
 
             AddDialog(new ChoicePrompt("ActionStepPrompt"));
-            AddDialog(new SsoSignInDialog(_connectionName, _tokenService));
+            AddDialog(new SsoSignInDialog(_connectionName, _tokenService, _userState));
             AddDialog(new SkillDialog(CreateSkillDialogOptions(skillsConfig, botId, conversationIdFactory, conversationState), nameof(SkillDialog)));
 
             var waterfallSteps = new WaterfallStep[]
             {
               PromptActionStepAsync,
-              
+              ShowToken
+
             };
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), waterfallSteps));
 
@@ -87,7 +92,35 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
         }
 
+        private async Task<DialogTurnResult> ShowToken(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            var hasGreetedUser = await GetHasGreetedUserFlag(stepContext.Context, cancellationToken);
+            return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+        }
 
+        private async Task<bool> GetHasGreetedUserFlag(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var userStateAccessors = _userState.CreateProperty<TokenStorage>("AccsessToekn");
+            var userTokens = await userStateAccessors.GetAsync(turnContext, () => new TokenStorage(), cancellationToken);
+            var userId = turnContext.Activity.From.Id;
+
+            // Check if the user has a token
+            if (userTokens.AccessTokens.TryGetValue(userId, out var userToken) && !string.IsNullOrEmpty(userToken))
+            {
+                // User has a token
+                await turnContext.SendActivityAsync("User has a token: " + userToken, cancellationToken: cancellationToken);
+                return true;
+                // Continue with your logic here...
+            }
+            else
+            {
+                // User does not have a token
+                await turnContext.SendActivityAsync("User does not have a token.", cancellationToken: cancellationToken);
+
+                return false;
+
+            }
+        }
         private async Task<DialogTurnResult> PromptFinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             // Clear active skill in state.
