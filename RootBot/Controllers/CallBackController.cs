@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using BDO.Bot.BDOSkillBot.Objects;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.BotBuilderSamples.RootBot.Objects;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -15,6 +19,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -25,16 +30,18 @@ namespace OpenUrlRedirectBot.Controllers
     public class CallBackController : ControllerBase
     {
         private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
-        public CallBackController(Microsoft.Extensions.Configuration.IConfiguration iconfig)
+        private readonly ITokenService _tokenService;
+        public CallBackController(Microsoft.Extensions.Configuration.IConfiguration iconfig, ITokenService tokenService)
         {
             configuration = iconfig;
+            _tokenService = tokenService;
         }
 
         [AllowAnonymous]
         [DisableRequestSizeLimit]
         [HttpGet("callback")]
         public async Task<IActionResult> AuthCallback([FromQuery] string code)
-        
+
         {
             var client = new HttpClient();
             client.Timeout = TimeSpan.FromSeconds(300);
@@ -58,8 +65,18 @@ namespace OpenUrlRedirectBot.Controllers
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 dynamic dynamicObject = JsonConvert.DeserializeObject(result);
-                // set the access token to inmemory storage here
+                // Extract the 'access_token' value from the JSON response
+                var accessToken = dynamicObject?.access_token?.ToString();
 
+                // Check if the 'access_token' is not null or empty before setting
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    // Set the access token using _tokenService
+                    _tokenService.SetToken(accessToken);
+
+                    // Optionally, you can also return the access token in the response
+                    return Ok(new { access_token = accessToken });
+                }
                 return Ok(result);
             }
             else

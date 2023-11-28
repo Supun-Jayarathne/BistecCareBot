@@ -11,6 +11,7 @@ using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Builder.Skills;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
+using Microsoft.BotBuilderSamples.RootBot.Objects;
 using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
@@ -22,10 +23,12 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
         private readonly BotFrameworkAuthentication _auth;
         private readonly string _connectionName;
         private readonly BotFrameworkSkill _ssoSkill;
+        private readonly ITokenService _tokenService;
 
-        public MainDialog(BotFrameworkAuthentication auth, ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillsConfiguration skillsConfig, IConfiguration configuration)
+        public MainDialog(BotFrameworkAuthentication auth, ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillsConfiguration skillsConfig, IConfiguration configuration, ITokenService tokenService)
             : base(nameof(MainDialog))
         {
+            _tokenService = tokenService;
             _auth = auth ?? throw new ArgumentNullException(nameof(auth));
 
             var botId = configuration.GetSection(MicrosoftAppCredentials.MicrosoftAppIdKey)?.Value;
@@ -54,7 +57,8 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             var waterfallSteps = new WaterfallStep[]
             {
                 CheckTokenAsync,
-                ContinueStepAsync
+                ContinueStepAsync,
+                PromptFinalStepAsync
             };
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), waterfallSteps));
 
@@ -87,14 +91,20 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             var userTokenClient = stepContext.Context.TurnState.Get<UserTokenClient>();
 
             // Show different options if the user is signed in on the parent or not.
-            var token = await userTokenClient.GetUserTokenAsync(userId, _connectionName, stepContext.Context.Activity?.ChannelId, null, cancellationToken);
-            if (token == null)
+            var tokens = await userTokenClient.GetUserTokenAsync(userId, _connectionName, stepContext.Context.Activity?.ChannelId, null, cancellationToken);
+            // Retrieve the access token from user state
+
+
+            var token = await _tokenService.GetToken();
+            if (string.IsNullOrWhiteSpace(token))
             {
-                var messageText = "First you need to login via bistec care system?";
+                 var messageText = "First you need to login via bistec care system?";
                 await stepContext.Context.SendActivityAsync(messageText, cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
 
             }
+
+
             //else
             //{
             //    var beginSkillActivity = new Activity
@@ -114,20 +124,22 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
 
         private async Task<DialogTurnResult> ContinueStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            //var userId = stepContext.Context.Activity?.From?.Id;
-            //var userTokenClient = stepContext.Context.TurnState.Get<UserTokenClient>();
+            var userId = stepContext.Context.Activity?.From?.Id;
+            var userTokenClient = stepContext.Context.TurnState.Get<UserTokenClient>();
 
-            //// Show different options if the user is signed in on the parent or not.
-            //var token = await userTokenClient.GetUserTokenAsync(userId, _connectionName, stepContext.Context.Activity?.ChannelId, null, cancellationToken);
-            //if (token == null)
-            //{
-            //    var messageText = "First you need to login via bistec care system?";
-            //    await stepContext.Context.SendActivityAsync(messageText, cancellationToken: cancellationToken);
-            //    return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
+            // Show different options if the user is signed in on the parent or not.
+            var tokens = await userTokenClient.GetUserTokenAsync(userId, _connectionName, stepContext.Context.Activity?.ChannelId, null, cancellationToken);
+            var token = await _tokenService.GetToken();
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                //    var messageText = "First you need to login via bistec care system?";
+                //    await stepContext.Context.SendActivityAsync(messageText, cancellationToken: cancellationToken);
+                //    return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
 
-            //}
-            //else
-            //{
+            }
+            else
+            {
                 var beginSkillActivity = new Activity
                 {
                     Type = ActivityTypes.Event,
@@ -138,8 +150,7 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
                 await _activeSkillProperty.SetAsync(stepContext.Context, _ssoSkill, cancellationToken);
 
                 return await stepContext.BeginDialogAsync(nameof(SkillDialog), new BeginSkillDialogOptions { Activity = beginSkillActivity }, cancellationToken);
-            //}
-
+            }
             //return await stepContext.NextAsync(cancellationToken: cancellationToken); ;
         }
 
