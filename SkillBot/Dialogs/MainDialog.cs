@@ -50,7 +50,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
             var weekLaterDate = DateTime.Now.AddDays(7).ToString("MMMM d, yyyy");
-            var messageText = stepContext.Options?.ToString() ?? $"What can I help you with today?\nSay something like \"Create a session from 8.30am to 5.30pm in Negombo\"";
+            var messageText = stepContext.Options?.ToString() ?? $"Hello! How can I assist you today? \r\n\r\n" +
+                $"I am capable of providing answers to the questions listed below. Please ensure that you use the specified format for your inquiries. \r\n\r\n" +
+                $"1. Number of my bookings [[today]] \r\n\r\n" +
+                $"2. Forecasted no of patients for [[month]]\r\n\r\n" +
+                $"3. Cancel my session on [[DD/MM/YYYY]] at [[Clinic name]]\r\n\r\n" +
+                $"4. Create a session for [[ [[DD/MM/YYYY]] at [[Clinic name]] from [[time.AM/PM]] to [[time.AM/PM]";
+
+            //var messageText = stepContext.Options?.ToString() ?? $"What can I help you with today?\nSay something like \"Create a session from 8.30am to 5.30pm in Negombo\"";
             var promptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
             return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = promptMessage }, cancellationToken);
         }
@@ -59,8 +66,8 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         {
             if (!_cluRecognizer.IsConfigured)
             {
-                // CLU is not configured, we just run the BookingDialog path with an empty BookingDetailsInstance.
-                return await stepContext.BeginDialogAsync(nameof(BookingDialog), new BookingDetails(), cancellationToken);
+                // CLU is not configured, we just run the CreateSessionDialog path with an empty SessionDetailsInstance.
+                return await stepContext.BeginDialogAsync(nameof(CreateSessionDialog), new SessionDetails(), cancellationToken);
             }
 
             // Call CLU and gather any potential booking details. (Note the TurnContext has the response to the prompt.)
@@ -98,17 +105,17 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     // Run the BookingDialog giving it whatever details we have from the CLU call, it will fill out the remainder.
                     return await stepContext.BeginDialogAsync(nameof(BookingDialog), sessionDetails, cancellationToken);
 
-                case FlightBooking.Intent.BookFlight:
-                    // Initialize BookingDetails with any entities we may have found in the response.
-                    var bookingDetails = new BookingDetails()
-                    {
-                        Destination = cluResult.Entities.GetToCity(),
-                        Origin = cluResult.Entities.GetFromCity(),
-                        TravelDate = cluResult.Entities.GetFlightDate(),
-                    };
+                //case FlightBooking.Intent.BookFlight:
+                //    // Initialize BookingDetails with any entities we may have found in the response.
+                //    var bookingDetails = new BookingDetails()
+                //    {
+                //        Destination = cluResult.Entities.GetToCity(),
+                //        Origin = cluResult.Entities.GetFromCity(),
+                //        TravelDate = cluResult.Entities.GetFlightDate(),
+                //    };
 
-                    // Run the BookingDialog giving it whatever details we have from the CLU call, it will fill out the remainder.
-                    return await stepContext.BeginDialogAsync(nameof(BookingDialog), bookingDetails, cancellationToken);
+                //    // Run the BookingDialog giving it whatever details we have from the CLU call, it will fill out the remainder.
+                //    return await stepContext.BeginDialogAsync(nameof(BookingDialog), bookingDetails, cancellationToken);
 
                 case FlightBooking.Intent.GetWeather:
                     // We haven't implemented the GetWeatherDialog so we just display a TODO message.

@@ -12,8 +12,9 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 {
     public class CreateSessionDialog : CancelAndHelpDialog
     {
-        private const string LocationStepMsgText = "Where would you like to create a session?";
-        private const string StartTimeStepMsgText = "When would you like to start the session?";
+        private const string LocationStepMsgText = "Where would you like to create a session? Eg: Nugegoda";
+        private const string StartTimeStepMsgText = "When would you like to start the session? Eg: 08.30am";
+        private const string EndTimeStepMsgText = "When would you like to end the session? Eg: 02.30pm";
 
         public CreateSessionDialog()
             : base(nameof(CreateSessionDialog))
@@ -51,6 +52,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         {
             var sessionDetails = (SessionDetails)stepContext.Options;
 
+            sessionDetails.Location = (string)stepContext.Result;
             //sessionDetails.StartTime = (string)stepContext.Result;
 
             if (sessionDetails.StartTime == null)
@@ -66,12 +68,18 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         {
             var sessionDetails = (SessionDetails)stepContext.Options;
 
+            sessionDetails.StartTime = (string)stepContext.Result;
             //sessionDetails.EndTime = (string)stepContext.Result;
 
-            if (sessionDetails.EndTime == null || IsAmbiguous(sessionDetails.EndTime))
+            if (sessionDetails.EndTime == null)
             {
-                return await stepContext.BeginDialogAsync(nameof(DateResolverDialog), sessionDetails.EndTime, cancellationToken);
+                var promptMessage = MessageFactory.Text(EndTimeStepMsgText, EndTimeStepMsgText, InputHints.ExpectingInput);
+                return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = promptMessage }, cancellationToken);
             }
+            //if (sessionDetails.EndTime == null || IsAmbiguous(sessionDetails.EndTime))
+            //{
+            //    return await stepContext.BeginDialogAsync(nameof(DateResolverDialog), sessionDetails.EndTime, cancellationToken);
+            //}
 
             return await stepContext.NextAsync(sessionDetails.EndTime, cancellationToken);
         }
@@ -80,6 +88,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         {
             var sessionDetails = (SessionDetails)stepContext.Options;
 
+            sessionDetails.EndTime = (string)stepContext.Result;
             //sessionDetails.TravelDate = (string)stepContext.Result;
 
             var messageText = $"Please confirm, I have you create a session at: {sessionDetails.Location} from: {sessionDetails.StartTime} to: {sessionDetails.EndTime}. Is this correct?";

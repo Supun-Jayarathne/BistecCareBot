@@ -98,7 +98,7 @@ namespace Microsoft.BotBuilderSamples.SSORootBot.Dialogs
             var token = await _tokenService.GetToken();
             if (string.IsNullOrWhiteSpace(token))
             {
-                 var messageText = "First you need to login via bistec care system?";
+                 var messageText = "Please login for continue.";
                 await stepContext.Context.SendActivityAsync(messageText, cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(SsoSignInDialog), null, cancellationToken);
 
